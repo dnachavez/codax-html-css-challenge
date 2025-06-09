@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODAX Community - Where Developers Thrive</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-orange: #f97316;
+      --primary-orange-light: #fb923c;
+      --primary-orange-dark: #ea580c;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-green: #10b981;
+      --accent-pink: #ec4899;
+      
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --border-primary: #e2e8f0;
+      --border-secondary: #f1f5f9;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-glow: 0 0 0 1px rgba(249, 115, 22, 0.1), 0 4px 16px rgba(249, 115, 22, 0.12);
+      
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+      --space-4xl: 8rem;
+      
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-3xl: 2rem;
+      
+      --font-sans: "Suisse Intl", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    #theme-toggle-checkbox:checked ~ .site-container {
+      --bg-primary: #0a0f1c;
+      --bg-secondary: #1a202c;
+      --bg-tertiary: #2d3748;
+      --bg-card: #1a202c;
+      --bg-card-hover: #2d3748;
+      
+      --text-primary: #f7fafc;
+      --text-secondary: #e2e8f0;
+      --text-muted: #a0aec0;
+      
+      --border-primary: #2d3748;
+      --border-secondary: #4a5568;
+      
+      --white: #1a202c;
+      
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.6);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 0 1px rgba(249, 115, 22, 0.4), 0 4px 20px rgba(249, 115, 22, 0.5);
+    }
+    
+    #theme-toggle-checkbox:checked ~ .site-container .sun-icon {
+      display: none;
+    }
+
+    #theme-toggle-checkbox:checked ~ .site-container .moon-icon {
+      display: block !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-orange-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    .section {
+      padding: var(--space-4xl) 0;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: var(--space-sm) 0;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+
+    #theme-toggle-checkbox:checked ~ .site-container .navbar {
+      background: rgba(10, 15, 28, 0.2);
+    }
+
+    .nav-container {
+      background: var(--bg-card);
+      padding: var(--space-xs) var(--space-lg);
+      border-radius: 9999px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-lg);
+      margin: var(--space-sm) auto;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-signin {
+      padding: var(--space-xs) var(--space-md);
+      border: 1px solid var(--border-secondary);
+      border-radius: 9999px;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-signin:hover {
+      background: var(--bg-secondary);
+      border-color: var(--primary-orange);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-orange);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.025em;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-md);
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    .nav-cta {
+      background: var(--primary-orange);
+      color: var(--white);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-orange-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xs);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg-secondary);
+      border-color: var(--primary-orange);
+      color: var(--primary-orange);
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(circle at center, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-3xl);
+      padding: var(--space-xs) var(--space-md);
+      margin-bottom: var(--space-xl);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: var(--space-md);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+      line-height: 1.5;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .btn-primary {
+      background: var(--primary-orange);
+      color: var(--white);
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-xl);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-orange-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      padding: var(--space-md) var(--space-xl);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-xl);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-primary);
+      background: var(--bg-secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-mascot {
+      height: 120px;
+      width: auto;
+      margin-bottom: var(--space-lg);
+      animation: float 6s ease-in-out infinite;
+      object-fit: contain;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-xl);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card:hover {
+      border-color: var(--primary-orange);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: var(--space-md);
+      color: var(--primary-orange);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      color: var(--text-primary);
+    }
+
+    .card-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--primary-orange);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-3xl);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+
+    #theme-toggle-checkbox:checked ~ .site-container .section-badge {
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: var(--space-md);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: var(--space-lg);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary-orange);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-top: var(--space-xs);
+    }
+
+    .testimonial {
+      background: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-xl);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial:hover {
+      border-color: var(--primary-orange);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .testimonial-quote {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: 600;
+    }
+
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-primary);
+      padding: var(--space-xl) 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      color: var(--text-muted);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .animate-slide-in-left {
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .animate-slide-in-right {
+      animation: slideInRight 0.8s ease-out;
+    }
+
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .scroll-animate:nth-child(1) { animation-delay: 0ms; }
+    .scroll-animate:nth-child(2) { animation-delay: 100ms; }
+    .scroll-animate:nth-child(3) { animation-delay: 200ms; }
+    .scroll-animate:nth-child(4) { animation-delay: 300ms; }
+
+          @media (max-width: 768px) {
+      .container {
+        padding: 0 var(--space-sm);
+      }
+      
+      .section {
+        padding: var(--space-2xl) 0;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-actions {
+        gap: var(--space-xs);
+      }
+
+      .nav-cta {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .card {
+        padding: var(--space-md);
+      }
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .icon-lg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: var(--space-xl);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .scroll-mouse {
+      width: 24px;
+      height: 40px;
+      border: 2px solid var(--primary-orange);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 2px;
+      height: 8px;
+      background: var(--primary-orange);
+      border-radius: 1px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scroll 2s infinite;
+    }
+
+    @keyframes scroll {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="theme-toggle-checkbox" hidden>
+  <div class="site-container">
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-container">
+        <a href="#home" class="nav-brand">
+          <img src="https://trion-05.github.io/codax.org/img/logo.png" alt="Codax Logo" class="nav-logo">
+          <span class="nav-title">CODAX</span>
+        </a>
+        
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#events" class="nav-link">Events</a></li>
+          <li><a href="#community" class="nav-link">Community</a></li>
+        </ul>
+        
+        <div class="nav-actions">
+          <label for="theme-toggle-checkbox" class="theme-toggle" aria-label="Toggle dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </label>
+          <a href="#join" class="nav-cta">Join Community</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero scroll-animate">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>🚀</span>
+          <span>Building the future of tech communities</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Welcome to <span class="text-gradient">CODAX</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          A dynamic tech community where passionate developers learn, collaborate, and grow together in the heart of innovation.
+        </p>
+        
+        <div class="hero-buttons">
+          <a href="#join" class="btn-primary">
+            <span>Join Our Community</span>
+            <span>→</span>
+          </a>
+          <a href="#about" class="btn-secondary">
+            <span>Learn More</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="about" class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header scroll-animate">
+        <span class="section-badge">Our Story</span>
+        <h2 class="section-title">
+          About <span class="text-gradient">Codax</span>
+        </h2>
+        <p class="section-subtitle">
+          Founded by passionate tech enthusiasts, we're building a community that bridges the gap between learning and innovation.
+        </p>
+      </div>
+      
+      <div class="grid grid-2" style="align-items: center;">
+        <div class="scroll-animate">
+          <img src="https://trion-05.github.io/codax.org/img/alt_logo.png" alt="Codax Community" style="width: 100%; max-width: 400px; margin: 0 auto; display: block; object-fit: contain;" class="hero-mascot">
+        </div>
+        
+        <div class="scroll-animate">
+          <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--primary-orange);">Our Journey</h3>
+          
+          <p style="color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; margin-bottom: var(--space-md);">
+            The Codax community was born from a simple yet powerful vision: to create an environment where tech enthusiasts can learn, collaborate, and grow together without boundaries.
+          </p>
+          
+          <p style="color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7; margin-bottom: var(--space-md);">
+            Founded in 2024 by passionate computer science students from the Cotabato region, we recognized the limited tech opportunities in our local area and decided to change that narrative.
+          </p>
+          
+          <p style="color: var(--text-secondary); font-size: 1.125rem; line-height: 1.7;">
+            Today, Codax thrives as a hub where students and tech enthusiasts collaborate, share knowledge, and elevate one another. Our playful duck logo reflects our fun and approachable nature.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg-primary);">
+    <div class="container">
+      <div class="section-header scroll-animate">
+        <span class="section-badge">Why Choose Us</span>
+        <h2 class="section-title">
+          Why <span class="text-gradient">Codax?</span>
+        </h2>
+        <p class="section-subtitle">
+          Our goal is to provide a platform that supports continuous improvement, innovation, and success in the rapidly evolving world of technology.
+        </p>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card scroll-animate">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4.5 16.5c-1.5 1.5-1.5 4.5 0 6s4.5 1.5 6 0l1-1h-1l-1-1"/>
+            <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+          </svg>
+          <h3 class="card-title">Innovation Hub</h3>
+          <p class="card-description">
+            A supportive and engaging environment for like-minded individuals to connect, learn, and inspire each other through cutting-edge projects.
+          </p>
+        </div>
+        
+        <div class="card scroll-animate">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3 class="card-title">Collaboration</h3>
+          <p class="card-description">
+            Foster meaningful collaboration, mentorship, and innovation among students and professionals in the tech industry.
+          </p>
+        </div>
+        
+        <div class="card scroll-animate">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3v18h18"/>
+            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+          </svg>
+          <h3 class="card-title">Growth</h3>
+          <p class="card-description">
+            Codax stands as a beacon for those who seek to expand their knowledge, connect with peers, and make a significant impact.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header scroll-animate">
+        <span class="section-badge">What We Offer</span>
+        <h2 class="section-title">
+          Community <span class="text-gradient">Features</span>
+        </h2>
+        <p class="section-subtitle">
+          Discover the tools, resources, and opportunities that make Codax the perfect place for your tech journey.
+        </p>
+      </div>
+      
+      <div class="grid grid-4">
+        <div class="card scroll-animate" style="background: var(--bg-primary);">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+          </svg>
+          <h3 class="card-title">Learning Sessions</h3>
+          <p class="card-description">Regular workshops and interactive learning sessions to enhance your technical skills and knowledge.</p>
+        </div>
+        
+        <div class="card scroll-animate" style="background: var(--bg-primary);">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+          <h3 class="card-title">Competitions</h3>
+          <p class="card-description">Exciting coding competitions and hackathons that challenge your abilities and showcase your talent.</p>
+        </div>
+        
+        <div class="card scroll-animate" style="background: var(--bg-primary);">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3 class="card-title">Networking</h3>
+          <p class="card-description">Connect with like-minded developers, industry professionals, and potential collaborators.</p>
+        </div>
+        
+        <div class="card scroll-animate" style="background: var(--bg-primary);">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6"/>
+            <path d="M21 12h-6m-6 0H3"/>
+          </svg>
+          <h3 class="card-title">Mentorship</h3>
+          <p class="card-description">Get guidance from experienced mentors and industry experts to accelerate your career growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="section" style="background: var(--bg-primary);">
+    <div class="container">
+      <div class="section-header scroll-animate">
+        <span class="section-badge">Join Us</span>
+        <h2 class="section-title">
+          Our <span class="text-gradient">Events</span>
+        </h2>
+        <p class="section-subtitle">
+          Join us for exciting events that bring our community together and foster learning, collaboration, and innovation.
+        </p>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card scroll-animate">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <h3 class="card-title" style="color: var(--primary-orange);">Kumustahan Sesh</h3>
+          <p class="card-description" style="margin-bottom: var(--space-md);">
+            Regular community gatherings where members share updates, discuss projects, and connect with each other in a casual, friendly environment.
+          </p>
+          <div style="color: var(--primary-orange); font-size: 0.875rem; font-weight: 600;">📅 Monthly Sessions</div>
+        </div>
+        
+        <div class="card scroll-animate">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+          </svg>
+          <h3 class="card-title" style="color: var(--primary-orange);">Byghts</h3>
+          <p class="card-description" style="margin-bottom: var(--space-md);">
+            Bright minds coming together! Interactive workshops, tech talks, and collaborative sessions designed to illuminate new possibilities in technology.
+          </p>
+          <div style="color: var(--primary-orange); font-size: 0.875rem; font-weight: 600;">📅 Quarterly Events</div>
+        </div>
+        
+        <div class="card scroll-animate">
+          <svg class="card-icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+          <h3 class="card-title" style="color: var(--primary-orange);">Code'ax Cup</h3>
+          <p class="card-description" style="margin-bottom: var(--space-md);">
+            Our signature coding competition where developers showcase their skills, compete in challenges, and win exciting prizes while building lasting connections.
+          </p>
+          <div style="color: var(--primary-orange); font-size: 0.875rem; font-weight: 600;">📅 Annual Competition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header scroll-animate">
+        <span class="section-badge">Our Impact</span>
+        <h2 class="section-title">
+          Community <span class="text-gradient">Highlights</span>
+        </h2>
+        <p class="section-subtitle">
+          Numbers that showcase the growth and impact of our vibrant tech community.
+        </p>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-item scroll-animate">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Active Members</span>
+        </div>
+        
+        <div class="stat-item scroll-animate">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Events Hosted</span>
+        </div>
+        
+        <div class="stat-item scroll-animate">
+          <span class="stat-number">10+</span>
+          <span class="stat-label">Partner Universities</span>
+        </div>
+        
+        <div class="stat-item scroll-animate">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Community Love</span>
+        </div>
+      </div>
+      
+      <div style="margin-top: var(--space-3xl);">
+        <h3 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: var(--space-xl); color: var(--text-primary);" class="scroll-animate">What Our Members Say</h3>
+        
+        <div class="grid grid-2">
+          <div class="testimonial scroll-animate">
+            <p class="testimonial-quote">
+              "Codax has been instrumental in my growth as a developer. The community is welcoming, and the events are always engaging and educational. I've learned more here than in any classroom."
+            </p>
+            <div class="testimonial-author">— Sarah Chen, CS Student</div>
+          </div>
+          
+          <div class="testimonial scroll-animate">
+            <p class="testimonial-quote">
+              "The mentorship opportunities and collaborative projects at Codax have helped me land my dream job in tech. The connections I've made here are invaluable. Highly recommend!"
+            </p>
+            <div class="testimonial-author">— Mark Rodriguez, Software Engineer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg-primary);">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;" class="scroll-animate">
+        <h2 style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: var(--space-md); line-height: 1.2; letter-spacing: -0.02em; color: var(--text-primary);">
+          Ready to <span class="text-gradient">Join Us?</span>
+        </h2>
+        
+        <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: var(--space-xl); line-height: 1.6;">
+          Become part of a community that's shaping the future of technology. Connect, learn, and grow with passionate developers from around the world.
+        </p>
+        
+        <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <a href="#" class="btn-primary">
+            <span>Join Community</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#" class="btn-secondary">
+            <span>Contact Us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div style="display: flex; align-items: center; justify-content: center; gap: var(--space-sm); margin-bottom: var(--space-md);">
+          <img src="https://trion-05.github.io/codax.org/img/logo.png" alt="Codax Logo" style="height: 24px; width: auto;">
+          <span style="font-weight: 700; color: var(--primary-orange);">CODAX</span>
+        </div>
+        
+        <p style="margin-bottom: var(--space-sm);">
+          Building the future of tech communities, one developer at a time.
+        </p>
+        
+        <p style="font-size: 0.875rem;">
+          © 2024 Codax Community. Made with ❤️ by passionate developers.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
