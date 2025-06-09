@@ -1,5 +1,9 @@
 # CODAX Community - HTML & CSS Challenge Submission
 
+![Light Theme](screenshot-light.jpg)
+
+![Dark Theme](screenshot-dark.jpg)
+
 ## 🏆 CODE'AX CUP Challenge Entry
 
 This is my submission for the **CODE'AX CUP HTML and CSS Challenge** hosted by the Codax Community. The challenge was to create a single-page promotional website that celebrates the Codax community using only HTML and CSS.
